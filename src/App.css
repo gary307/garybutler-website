@@ -1,0 +1,47 @@
+.gb {
+  text-align: center;
+}
+
+p {
+  line-height: 25px;
+  letter-spacing: 1px;
+}
+
+.gb-logo {
+  animation: App-logo-spin infinite 20s linear;
+  height: 80px;
+}
+
+.gb-header {
+  background-color: #222;
+  height: 150px;
+  padding: 20px;
+  color: white;
+}
+
+.gb-title {
+  font-size: 1.5em;
+}
+
+.gb-intro {
+  font-size: large;
+  width: 100%;
+  max-width: 900px;
+  padding: 20px;
+  margin: 0px auto;
+}
+
+.app-transition-enter {
+  opacity: 0.01;
+}
+.app-transition-enter-active {
+  opacity: 1;
+  transition: all 500ms ease-in-out;
+}
+.app-transition-exit {
+  opacity: 0;
+}
+.app-transition-exit-active {
+  opacity: 1;
+  transition: all 500ms ease-in-out;
+}
