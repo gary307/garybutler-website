@@ -1,38 +1,50 @@
-import React, { Component, PureComponent } from 'react';
+import React, { PureComponent } from 'react';
 import './Work.css';
+import { Link } from 'react-router-dom';
 
 class Work extends PureComponent {
-    componentWillReceiveProps(prev) {
-        this.props.workSelector();
+    componentWillMount() {
+        // console.log(this.props.workSelection['bt']);
     }
 
     render() {
-        const {
-            closeWork,
-            workSelection = {
-                fields: { title: '', copy: '', skills: '', images: [] }
-            },
-            portfolio
-        } = this.props;
+        const { workSelection, match } = this.props;
+
+        console.log(workSelection[match.params.id]);
 
         return (
             <div className="work">
-                <div class="gb-closeWork" onClick={closeWork}>
-                    <h4>Back to Home</h4>
-                </div>
+                <Link to="/">
+                    <div className="gb-closeWork">
+                        <h4>Back to Home</h4>
+                    </div>
+                </Link>
 
-                <div className="work__row">
-                    <div className="work__copy">
-                        <h2>{workSelection.fields.title}</h2>
-                        <p>{workSelection.fields.copy}</p>
-                        <p>{workSelection.fields.skills}</p>
+                {workSelection[match.params.id] ? (
+                    <div className="work__row">
+                        <div className="work__copy">
+                            <h2>{workSelection[match.params.id].title}</h2>
+                            <p>
+                                {workSelection[this.props.match.params.id].copy}
+                            </p>
+                            <p>
+                                {
+                                    workSelection[this.props.match.params.id]
+                                        .skills
+                                }
+                            </p>
+                        </div>
+                        <div className="work__image">
+                            {workSelection[
+                                this.props.match.params.id
+                            ].images.map(image => (
+                                <img src={image.fields.file.url} />
+                            ))}
+                        </div>
                     </div>
-                    <div className="work__image">
-                        {workSelection.fields.images.map(image => (
-                            <img src={image.fields.file.url} />
-                        ))}
-                    </div>
-                </div>
+                ) : (
+                    ''
+                )}
             </div>
         );
     }

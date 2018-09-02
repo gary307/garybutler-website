@@ -1,47 +1,120 @@
 .gb {
-  text-align: center;
+    text-align: center;
 }
 
 p {
-  line-height: 25px;
-  letter-spacing: 1px;
+    line-height: 25px;
+    letter-spacing: 1px;
 }
 
 .gb-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 80px;
+    animation: App-logo-spin infinite 20s linear;
+    height: 80px;
 }
 
 .gb-header {
-  background-color: #222;
-  height: 150px;
-  padding: 20px;
-  color: white;
+    background-color: #222;
+    height: 150px;
+    padding: 20px;
+    color: white;
 }
 
 .gb-title {
-  font-size: 1.5em;
+    font-size: 1.5em;
 }
 
 .gb-intro {
-  font-size: large;
-  width: 100%;
-  max-width: 900px;
-  padding: 20px;
-  margin: 0px auto;
+    font-size: large;
+    width: 100%;
+    max-width: 900px;
+    padding: 20px;
+    margin: 0px auto;
 }
 
 .app-transition-enter {
-  opacity: 0.01;
+    opacity: 0.01;
 }
-.app-transition-enter-active {
-  opacity: 1;
-  transition: all 500ms ease-in-out;
+
+.app-transition-enter.app-transition-enter-active {
+    opacity: 1;
+    transition: opacity 100ms ease-in;
 }
+
+.example-leave {
+    opacity: 1;
+    transition: opacity 0.5s ease-in;
+}
+
+.app-transition-leave.app-transition-leave-active {
+    opacity: 0.01;
+    transition: opacity 100ms ease-in;
+}
+
+.app-transition-appear {
+    opacity: 0.1;
+}
+
 .app-transition-exit {
-  opacity: 0;
+    opacity: 1;
 }
-.app-transition-exit-active {
-  opacity: 1;
-  transition: all 500ms ease-in-out;
+
+.app-transition-exit.app-transition-exit-active {
+    opacity: 0.1;
+    transition: opacity 100ms ease-in;
+}
+
+.app-transition-appear.app-transition-appear-active {
+    opacity: 1;
+    transition: opacity 100ms ease;
+}
+
+/* .slide-enter {
+    opacity: 0.01;
+    margin-left: -200px;
+}
+
+.slide-enter.slide-enter-active {
+    opacity: 1;
+    margin-left: 0px;
+    transition: margin-left 0.2s ease-in, opacity 0.2s ease-in;
+}
+
+.slide-leave {
+    opacity: 1;
+    margin-left: 0px;
+}
+
+.slide-leave.slide-leave-active {
+    opacity: 0.01;
+    margin-left: 200px;
+    transition: margin-left 0.7s ease-in, opacity 0.7s ease-in;
+}
+
+.slide-appear {
+    opacity: 0.01;
+    margin-left: -200px;
+}
+
+.slide-appear.slide-appear-active {
+    opacity: 1;
+    margin-left: 0px;
+    transition: margin-left 0.2s ease-in, opacity 0.2s ease-in;
+}
+
+.slide-exit {
+    opacity: 1;
+    margin-left: 0px;
+}
+
+.slide-exit.slide-exit-active {
+    opacity: 1;
+    margin-left: 0px;
+    transition: margin-left 0.2s ease-in, opacity 0.2s ease-in;
+} */
+
+.animated-page-wrapper {
+    /* position: absolute; */
+    width: 100%;
+    height: 100%;
+    display: block;
 }

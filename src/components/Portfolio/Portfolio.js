@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './Portfolio.css';
 import { Link } from 'react-router-dom';
-
+import ReactCSSTransitionGroup from 'react-addons-css-transition-group'; // ES6
 const contentful = require('contentful');
 
 const client = contentful.createClient({
@@ -18,7 +18,7 @@ class Portfolio extends Component {
     }
 
     render() {
-        const { portfolio, workSelector } = this.props;
+        const { portfolio, pageSelector } = this.props;
 
         return (
             <div>
@@ -28,14 +28,11 @@ class Portfolio extends Component {
                 <div className="portfolio">
                     {portfolio.map((item, key) => (
                         <Link
-                            to={`work/${item.fields.title.replace(/ /g, '-')}`}
+                            to={`work/${item.fields.title
+                                .replace(/ /g, '-')
+                                .toLowerCase()}`}
                         >
                             <div
-                                onClick={this.props.workSelector.bind(
-                                    this,
-                                    key
-                                )}
-                                // onClick={workSelect.bind(this, key)}
                                 className="portfolio__item"
                                 style={{
                                     background:

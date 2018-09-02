@@ -1,15 +1,9 @@
 import React, { Component } from 'react';
-import Portfolio from './components/Portfolio/Portfolio';
-import Work from './components/Work/Work';
-import About from './components/About/About';
 import BodyRoute from './Router';
 import './App.css';
-import { CSSTransition } from 'react-transition-group';
-import ReactCSSTransitionGroup from 'react-addons-css-transition-group'; // ES6
 import { Link } from 'react-router-dom';
 
 const contentful = require('contentful');
-
 const client = contentful.createClient({
     // This is the space ID. A space is like a project folder in Contentful terms
     space: 'qvi9n1jiag8y',
@@ -23,44 +17,30 @@ class App extends Component {
         super();
         this.state = {
             portfolio: [],
-            workSelection: 0
+            workData: {}
         };
     }
 
     work = client
         .getEntries('work')
         .then(entry => {
+            var newWorkData = {};
+            entry.items.map(item => {
+                newWorkData[
+                    item.fields.title.replace(/ /g, '-').toLowerCase()
+                ] = item.fields;
+            });
             this.setState({
-                portfolio: entry.items,
-                workSelection: 0
+                portfolio: entry.items
+            });
+            return newWorkData;
+        })
+        .then(workData => {
+            this.setState({
+                workData: workData
             });
         })
         .catch(err => console.log(err));
-
-    workSelector = number => {
-        var number;
-        var id = this.state.portfolio.filter((item, key) => {
-            if (
-                item.fields.title
-                    .replace(/ /g, '-')
-                    .includes(window.location.pathname)
-            ) {
-                number = key;
-            }
-        });
-
-        if (id !== this.state.workSelection) {
-            this.setState({
-                workSelection: number
-            });
-        }
-    };
-
-    closeWork = () => {
-        this.setState({
-            page: 'Home'
-        });
-    };
 
     render() {
         return (
@@ -69,34 +49,15 @@ class App extends Component {
                     <h1 className="App-title">GARY BUTLER</h1>
                     <h4>FRONT END WEB DEVELOPER</h4>
                     <nav>
-                        {/* <span onClick={this.pageSelection.bind(this, 'About')}>
-                            About
-                        </span>
-                        <span
-                            onClick={this.pageSelection.bind(this, 'Portfolio')}
-                        >
-                            Portfolio
-                        </span> */}
+                        <Link to="/about">About</Link>
+                        <Link to="/">Portfolio</Link>
                     </nav>
                 </header>
-
                 <div>
-                    <ReactCSSTransitionGroup
-                        transitionName="app-transition"
-                        transitionEnterTimeout={300}
-                        transitionLeaveTimeout={300}
-                    >
-                        <BodyRoute
-                            closeWork={this.closeWork}
-                            workSelect={this.workSelection}
-                            portfolio={this.state.portfolio}
-                            workSelection={
-                                this.state.portfolio[this.state.workSelection]
-                            }
-                            workId={this.state.workSelection}
-                            workSelector={this.workSelector}
-                        />
-                    </ReactCSSTransitionGroup>
+                    <BodyRoute
+                        portfolio={this.state.portfolio}
+                        workSelection={this.state.workData}
+                    />
                 </div>
             </div>
         );
